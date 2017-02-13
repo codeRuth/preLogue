@@ -27,7 +27,7 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
     def on_message(self, message):
         print(message)
         self.write_message(message)
-        # app.main_loop(message)
+        app.main_loop(message)
 
     def on_close(self):
         print("Connection Closed.")
