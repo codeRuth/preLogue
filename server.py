@@ -8,8 +8,8 @@ from changeSlides import Slide
 
 PORT = 5000
 
-
 app = Slide()
+
 
 class IndexHandler(tornado.web.RequestHandler):
     @tornado.web.asynchronous
