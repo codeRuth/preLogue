@@ -7,11 +7,11 @@ function init() {
     testWebSocket();
 }
 
-function getValue() {
-    //var textField = document.txt.value;
-    writeToScreen("SENT: " + document.getElementById('msg').value);
-    websocket.send(document.getElementById('msg').value)
-}
+// function getValue(input) {
+//     //var textField = document.txt.value;
+//     //writeToScreen("SENT: " + document.getElementById('msg').value);
+//     websocket.send(input);
+// }
 
 function testWebSocket() {
     websocket.onopen = function(evt) {

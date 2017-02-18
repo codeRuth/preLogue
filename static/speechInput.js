@@ -23,6 +23,7 @@ function setup() {
     reco.onresult = function (e) {
         try {
             console.log('onresult ' + getResult(e.results, e.resultIndex));
+            doSend(getResult(e.results, e.resultIndex));
         } catch (ex) {
             console.log('onresult - exception');
         }
@@ -34,12 +35,8 @@ function setup() {
 
 function start() {
     console.log('start()');
-    //reco.lang = document.getElementById('lang').value;
     reco.continuous = document.getElementById('continuous').checked;
-    //reco.interimResults = document.getElementById('interim').checked;
-    //console.log('reco.lang = ' + reco.lang);
     console.log('reco.continuous = ' + reco.continuous);
-    //console.log('reco.interimResults = ' + reco.interimResults);
     try {
         reco.start();
     } catch (e) {
