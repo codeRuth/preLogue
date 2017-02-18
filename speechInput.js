@@ -22,8 +22,7 @@ function setup() {
     };
     reco.onresult = function (e) {
         try {
-            console.log('onresult ' + res2str(e.results, e.resultIndex));
-            // res2str(e.results, e.resultIndex);
+            console.log('onresult ' + getResult(e.results, e.resultIndex));
         } catch (ex) {
             console.log('onresult - exception');
         }
@@ -53,36 +52,7 @@ function stop() {
     reco.stop();
 }
 
-function res2str(results, index) {
-    // var JSONObj = {};
-    // var jsonArr = [];
-    //
-    // JSONObj.property = index;
-    // JSONObj.anotherProp = [];
-    // for (r in results[index]) {
-    //     JSONObj.anotherProp.push(r);
-    //
-    //
-    //     jsonArr.push({
-    //         text: r.,
-    //         confidence:
-    //     });
-    // }
-
-    // var json = JSON.stringify(myObject);
-    // var s = index + ":{";
-    // var r = results[index];
-    // if (r.isFinal)
-    //     s += '(final) ';
-    // s += '[';
-    // for (var j = 0; j < r.length; ++j) {
-    //     s += r.item(j).transcript + ' (' + r.item(j).confidence + ')';
-    //     if (j < r.length - 1)
-    //         s += ',';
-    // }
-    // s += ']';
-    // s += "}";
-
+function getResult(results, index) {
     return results[index].item(0).transcript.toString();
 }
 

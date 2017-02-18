@@ -26,13 +26,3 @@ class getTopAction:
     def get_top_classifier(self, input_string):
         classes = self.natural_language_classifier.classify(self.classifierID, input_string)
         return classes['classes'][0]
-
-
-# print(json.dumps(classifier, indent=2))
-
-# get_status()
-# get_classifiers("next slide")
-
-# a = getTopAction()
-# a.get_classifiers('previous slide')
-# print a.get_top_classifier('previous slide')

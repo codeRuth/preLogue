@@ -17,21 +17,19 @@ class Slide(object):
 
     def main_loop(self, message):
         action = self.get_top_classifier(message)
-        # action = message
-        # print action
 
-        if action == 'action.next':
-            print("next")
+        if action['class_name'] == 'action.next':
             self.presentation.SlideShowWindow.View.Next()
+            return "next"
 
         elif action['class_name'] == 'action.previous':
-            print("previous")
             self.presentation.SlideShowWindow.View.Previous()
+            return "previous"
 
         elif action['class_name'] == 'action.exit':
-            print("exit")
             self.presentation.SlideShowWindow.View.Exit()
+            return "exit"
 
         elif action['class_name'] == 'action.quit':
-            print("quit")
             self.app.Quit()
+            return "quit"
