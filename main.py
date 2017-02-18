@@ -27,4 +27,5 @@ def main():
         print("File Argument not given.")
 
 
-if __name__ == "__main__": main()
+if __name__ == "__main__":
+    main()

@@ -25,7 +25,7 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
         print("Connection Open.")
 
     def on_message(self, message):
-        print(message)
+        # print(message)
         app.main_loop(message)
         self.write_message(app.get_top_classifier(message))
 
@@ -48,5 +48,5 @@ if __name__ == '__main__':
     server = tornado.httpserver.HTTPServer(ws_app)
     server.listen(PORT)
     # hostIP = socket.gethostbyname(socket.gethostname())
-    print('*** Websocket Server Started at localhost : %d***' % PORT)
+    print('*** Websocket Server Started at 127.0.0.1 : %d***' % PORT)
     tornado.ioloop.IOLoop.instance().start()
