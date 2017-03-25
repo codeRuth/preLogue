@@ -2,10 +2,12 @@ from pptx import Presentation
 from pptx.enum.shapes import PP_PLACEHOLDER
 from pptx.exc import PackageNotFoundError
 import sys
+import json
 
 
 def get_title_object(input_presentation):
-    main_obj = dict()
+    main_obj = list()
+    list_obj = dict()
     try :
         prs = Presentation(input_presentation)
         for index, slide in enumerate(prs.slides):
@@ -13,8 +15,9 @@ def get_title_object(input_presentation):
                 if shape.is_placeholder:
                     phf = shape.placeholder_format
                     if phf.type == PP_PLACEHOLDER.TITLE or phf.type == PP_PLACEHOLDER.CENTER_TITLE or phf.type == PP_PLACEHOLDER.VERTICAL_TITLE:
-                        main_obj[index] = shape.text_frame.text
-        return main_obj
+                        main_obj.append(str(shape.text_frame.text))
+        list_obj['slides'] = main_obj
+        return json.dumps(list_obj)
     except PackageNotFoundError:
         print("PPTX not Found.")
 

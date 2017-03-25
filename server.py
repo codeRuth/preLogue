@@ -7,8 +7,7 @@ import os
 from changeSlides import Slide
 
 PORT = 5000
-
-app = Slide()
+slideObj = Slide()
 
 
 class IndexHandler(tornado.web.RequestHandler):
@@ -25,9 +24,7 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
         print("Connection Open.")
 
     def on_message(self, message):
-        # print(message)
-        print(app.main_loop(message))
-        # self.write_message(app.get_top_classifier(message))
+        self.write_message(slideObj.main_loop(message))
 
     def on_close(self):
         print("Connection Closed.")
@@ -44,9 +41,8 @@ class Application(tornado.web.Application):
 
 
 if __name__ == '__main__':
-    ws_app = Application()
-    server = tornado.httpserver.HTTPServer(ws_app)
+    app = Application()
+    server = tornado.httpserver.HTTPServer(app)
     server.listen(PORT)
-    # hostIP = socket.gethostbyname(socket.gethostname())
-    print('*** Websocket Server Started at 127.0.0.1 : %d***' % PORT)
+    print('*** Server Started at 127.0.0.1 : %d ***' % PORT)
     tornado.ioloop.IOLoop.instance().start()

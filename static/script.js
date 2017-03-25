@@ -7,12 +7,6 @@ function init() {
     testWebSocket();
 }
 
-// function getValue(input) {
-//     //var textField = document.txt.value;
-//     //writeToScreen("SENT: " + document.getElementById('msg').value);
-//     websocket.send(input);
-// }
-
 function testWebSocket() {
     websocket.onopen = function(evt) {
         onOpen(evt)
@@ -30,7 +24,6 @@ function testWebSocket() {
 
 function onOpen(evt) {
     writeToScreen("CONNECTED");
-    //doSend("WebSocket rocks");
 }
 
 function onClose(evt) {
