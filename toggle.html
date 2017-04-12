@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+        <script language="javascript" src="/static/script.js" type="text/javascript"></script>
+        <script src="static/speechInput.js" type="application/javascript"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.3/semantic.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.3/semantic.min.css" rel="stylesheet"/>
+</head>
+<script>
+
+function show(b){
+alert( $(b).hasClass("active"));
+}
+
+// attach ready event
+$(document)
+  .ready(function() {
+  var $toggle  = $('.ui.toggle.button');
+  $toggle
+    .state({
+      text: {
+        inactive : 'Vote',
+        active   : 'Voted'
+      }
+    })
+  ;
+
+})
+;
+</script>
+<body>
+
+<button class="ui toggle button" onclick="show(this)">
+  Vote
+</button>
+<br/><br/>
+<button class="ui toggle button" onclick="show(this)">
+  Vote
+</button>
+
+
+</body>
+</html>
