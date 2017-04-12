@@ -7,7 +7,7 @@
 import re
 import operator
 
-debug = False
+debug = True
 test = True
 
 
@@ -43,7 +43,7 @@ def separate_words(text, min_word_return_size):
     words = []
     for single_word in splitter.split(text):
         current_word = single_word.strip().lower()
-        # leave numbers in phrase, but don't count as words, since they tend to invalidate scores of their phrases
+        #leave numbers in phrase, but don't count as words, since they tend to invalidate scores of their phrases
         if len(current_word) > min_word_return_size and current_word != '' and not is_number(current_word):
             words.append(current_word)
     return words
@@ -88,13 +88,13 @@ def calculate_word_scores(phraseList):
         word_list = separate_words(phrase, 0)
         word_list_length = len(word_list)
         word_list_degree = word_list_length - 1
-        # if word_list_degree > 3: word_list_degree = 3 #exp.
+        #if word_list_degree > 3: word_list_degree = 3 #exp.
         for word in word_list:
             word_frequency.setdefault(word, 0)
             word_frequency[word] += 1
             word_degree.setdefault(word, 0)
-            word_degree[word] += word_list_degree  # orig.
-            # word_degree[word] += 1/(word_list_length*1.0) #exp.
+            word_degree[word] += word_list_degree  #orig.
+            #word_degree[word] += 1/(word_list_length*1.0) #exp.
     for item in word_frequency:
         word_degree[item] = word_degree[item] + word_frequency[item]
 
@@ -102,8 +102,8 @@ def calculate_word_scores(phraseList):
     word_score = {}
     for item in word_frequency:
         word_score.setdefault(item, 0)
-        word_score[item] = word_degree[item] / (word_frequency[item] * 1.0)  # orig.
-    # word_score[item] = word_frequency[item]/(word_degree[item] * 1.0) #exp.
+        word_score[item] = word_degree[item] / (word_frequency[item] * 1.0)  #orig.
+    #word_score[item] = word_frequency[item]/(word_degree[item] * 1.0) #exp.
     return word_score
 
 
@@ -142,8 +142,8 @@ if test:
 
     # Split text into sentences
     sentenceList = split_sentences(text)
-    # stoppath = "FoxStoplist.txt" #Fox stoplist contains "numbers", so it will not find "natural numbers" like in Table 1.1
-    stoppath = "SmartStoplist.txt"  # SMART stoplist misses some of the lower-scoring keywords in Figure 1.5, which means that the top 1/3 cuts off one of the 4.0 score words in Table 1.1
+    #stoppath = "FoxStoplist.txt" #Fox stoplist contains "numbers", so it will not find "natural numbers" like in Table 1.1
+    stoppath = "SmartStoplist.txt"  #SMART stoplist misses some of the lower-scoring keywords in Figure 1.5, which means that the top 1/3 cuts off one of the 4.0 score words in Table 1.1
     stopwordpattern = build_stop_word_regex(stoppath)
 
     # generate candidate keywords
@@ -161,10 +161,10 @@ if test:
 
     totalKeywords = len(sortedKeywords)
     if debug: print totalKeywords
-    print sortedKeywords[0:totalKeywords]
+    print sortedKeywords[0:(totalKeywords )]
 
     rake = Rake("SmartStoplist.txt")
-    sample_file = open("./SmartStoplist.txt", 'r')
-    text = sample_file.read()
+    sample_file=open("./SmartStoplist.txt",'r')
+    text=sample_file.read()
     keywords = rake.run(text)
     # print keywords

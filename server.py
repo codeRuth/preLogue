@@ -3,12 +3,13 @@ import tornado.websocket
 import tornado.httpserver
 import tornado.ioloop
 import os
+# from keywordExt import GetKeywords
 
 from changeSlides import Slide
 
 PORT = 5000
-slideObj = Slide()
-
+# slideObj = Slide()
+# key = GetKeywords()
 
 class IndexHandler(tornado.web.RequestHandler):
     @tornado.web.asynchronous
@@ -24,7 +25,9 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
         print("Connection Open.")
 
     def on_message(self, message):
-        self.write_message(slideObj.main_loop(message))
+        return
+        # self.write_message(key.getKey(message))
+        # slideObj.main_loop(message)
 
     def on_close(self):
         print("Connection Closed.")

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Test Speech</title>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script language="javascript" src="/static/script.js" type="text/javascript"></script>
+    <script src="static/speechInput.js" type="application/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.3/semantic.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.3/semantic.min.css" rel="stylesheet"/>
+</head>
+<style>
+    body {
+        background-image: url("pes.jpg");
+        background-repeat: no-repeat;
+    }
+
+    #p-bar {
+        margin-top: 15px;
+    }
+</style>
+
+<body onload="setup()">
+<script language="JavaScript" type="text/javascript">
+    function HandleBrowseClick() {
+        var fileinput = document.getElementById("browse");
+        fileinput.click();
+        var textinput = document.getElementById("filename");
+        textinput.value = fileinput.value;
+    }
+    $('#slide-right').click(function() {
+            $('slide-progress').progress('increment');
+    });
+
+</script>
+
+<!-- <p style="text-align:center">
+    <input type="file" id="browse" name="fileupload" style="display: none"/>
+    <input type="text" id="filename" readonly="true"/>
+    <input type="button" value="Click to select file" id="fakeBrowse" onclick="HandleBrowseClick();"/></br>
+    </br>
+    </br>
+    <button class="ui huge primary button" name="start" type="button" onclick="start()">Start</button>
+    <button class="ui huge primary button" name="stop" type="button" onclick="stop()">Stop</button>
+    <input type="checkbox" id="continuous">Continuous -->
+<div class="ui segments container">
+
+    <div class="ui top attached segment">
+        <i class="ui expand icon"></i>
+    </div>
+
+    <div class="ui attached segment">
+        <!-- <button class="ui labeled icon button">
+            <i class="attach icon"></i>
+            Select File
+        </button> -->
+        <h2 class="ui icon header">
+  <i class="settings icon"></i>
+  <div class="content">
+    Account Settings
+    <div class="sub header">Manage your account settings and set e-mail preferences.</div>
+  </div>
+</h2>
+    </div>
+
+
+
+
+    <div class="ui bottom attached segment">
+
+        <div class="ui grid">
+            <div class="two wide column">
+
+                <div class="ui buttons">
+                    <button class="ui icon button" id="slide-left">
+                        <i class="left chevron icon"></i>
+                    </button>
+                    <button class="ui toggle icon button">
+                        <i class="play icon"></i>
+                    </button>
+
+                    <button class="ui right icon button" id="slide-right">
+                        <i class="right chevron icon"></i>
+                    </button>
+                </div>
+
+
+            </div>
+
+            <div id="p-bar" class="fourteen wide column">
+                <div class="ui tiny progress" data-value="1" data-total="20" id="slide-progress">
+                    <div class="bar">
+                        <div class="progress"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+</p>
+</body>
+
+</html>
