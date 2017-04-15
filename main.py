@@ -31,4 +31,22 @@ def main():
 
 
 if __name__ == "__main__":
+
+    # if __name__ == '__main__':
+    #     with open('stoplist.txt') as f:
+    #         stopwords = f.read().splitlines()
+    #
+    #     queries = ["The mobile web is more important than mobile apps.",
+    #                "As a #roadmapscholar, I highly recommend #startup bootcamp for #founders by @andrewsroadmaps : http://t.co/ZBISIMEBRH (http://t.co/VF5CojRWNF)",
+    #                "RT @andrewsroadmaps: Proud of @naushadzaman &amp; @WasimKhal for winning the #IBMWatson hackathon! #roadmapscholars https://t.co/08sbAjKWKu."]
+    #
+    #     for query in queries:
+    #         print 'query = ', query
+    #         print 'get_keywords(query) = ', get_keywords(query)
+    #         print "get_keywords(query, ['NP'])", get_keywords(query, ['NP'])
+    #         print "extract_hashtag(query)", extract_hashtag(query)
+    #         print "extract_users(query)", extract_users(query)
+    #         print "extract_link(query)", extract_link(query)
+    #         print ''
+
     main()

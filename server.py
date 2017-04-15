@@ -3,11 +3,14 @@ import tornado.websocket
 import tornado.httpserver
 import tornado.ioloop
 import os
+import keywordr.keywordr as k
 # from keywordExt import GetKeywords
 
 from changeSlides import Slide
 
 PORT = 5000
+
+
 # slideObj = Slide()
 # key = GetKeywords()
 
@@ -25,7 +28,7 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
         print("Connection Open.")
 
     def on_message(self, message):
-        return
+        print 'get_keywords(query) = ', k.get_keywords(message)
         # self.write_message(key.getKey(message))
         # slideObj.main_loop(message)
 
