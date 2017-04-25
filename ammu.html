@@ -1,17 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Test Speech</title>
-        <script src="static/js/jquery-2.2.4.min.js"></script>
-        <!--<script src="static/js/wsockets.js" type="text/javascript"></script>-->
-        <script src="static/js/speechInput.js" type="application/javascript"></script>
-        <script src="static/js/semantic.min.js"></script>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.3/semantic.min.css" rel="stylesheet"/>
-        <link href="static/css/style.css" rel="stylesheet"/>
-    </head>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
 
-    <body>
+<head>
+    <meta charset="UTF-8">
+    <title>Test Speech</title>
+    <script src="static/js/jquery-2.2.4.min.js"></script>
+    <!--<script src="static/js/wsockets.js" type="text/javascript"></script>-->
+    <script src="static/js/speechInput.js" type="application/javascript"></script>
+    <script src="static/js/semantic.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.3/semantic.min.css" rel="stylesheet" />
+    <link href="static/css/style.css" rel="stylesheet" />
+</head>
+
+<body>
     <br/>
     <div class="ui segments container">
         <div class="ui top attached segment">
@@ -30,19 +31,28 @@
             </div>
         </div>
         <div id="app" class="ui attached segment">
-            <div class="ui centered aligned grid">
-                <div v-if="!image" class="eight wide row">
+            <div id="loader" class="ui inactive dimmer">
+                <div class="ui medium text loader">Loading</div>
+            </div>
+            <div id="content" class="ui centered aligned grid">
+                <div v-if="!image">
+                <div  class="eight wide row">
                     <h2 class="ui grey icon header">
                         <i class="attach grey icon"></i>
                         <div class="content">
                             Upload File
                             <div class="sub header center aligned">
                                 <p>Please Make sure that you upload a .pptx file saved as Office Open XML.</p>
-                                <input type="file" @change="onFileChange">
                             </div>
                         </div>
                     </h2>
-
+                </div>
+                <div class="three wide row">
+                    <form v-on:submit.prevent="uploadImage" method="POST" enctype="multipart/form-data">
+                        <label for="file" class="ui icon button"> <i class="upload icon"></i></label>
+                        <input type="file" id="file" style="display:none"@change="onFileChange($event)">
+                    </form>
+                </div>
                 </div>
                 <div v-else>
                     <img :src="image" />
@@ -50,14 +60,14 @@
             </div>
         </div>
         <div class="ui bottom attached segment">
-            <div class="ui grid">
+            <div id="control" class="ui grid">
                 <div class="two wide column">
                     <div class="ui buttons">
                         <button class="ui icon button" id="slide-left">
                         <i class="left chevron icon"></i>
                         </button>
-                        <button class="ui toggle icon button">
-                        <i class="play icon"></i>
+                        <button id="toggle" class="ui toggle icon button active">
+                            <i class="play icon"></i>
                         </button>
                         <button class="ui right icon button" id="slide-right">
                         <i class="right chevron icon"></i>
@@ -74,7 +84,8 @@
             </div>
         </div>
     </div>
-    </body>
-    <script src="https://unpkg.com/vue"></script>
-    <script src="static/js/script.js"></script>
+</body>
+<script src="https://unpkg.com/vue"></script>
+<script src="https://cdn.jsdelivr.net/vue.resource/1.3.1/vue-resource.min.js"></script>
+<script src="static/js/script.js"></script>
 </html>
