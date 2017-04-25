@@ -1,8 +1,8 @@
 from pptx import Presentation
 from pptx.enum.shapes import PP_PLACEHOLDER
 from pptx.exc import PackageNotFoundError
-import sys
-from keywordr import keywordr as k
+
+from lib.keywordr import keywordr as k
 
 
 class ProcessSlide(object):
@@ -28,9 +28,3 @@ class ProcessSlide(object):
     def getKeywords(self):
         for key in self.getTitle()['slides']:
             print k.get_keywords(key)
-
-
-
-if __name__ == '__main__':
-    p = ProcessSlide(sys.argv[1])
-    p.getKeywords()

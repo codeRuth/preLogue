@@ -1,12 +1,13 @@
-import tornado.web
-import tornado.websocket
+import os
+
 import tornado.httpserver
 import tornado.ioloop
-import os
-import keywordr.keywordr as k
-# from keywordExt import GetKeywords
+import tornado.web
+import tornado.websocket
 
-from changeSlides import Slide
+from lib.keywordr import keywordr as k
+
+# from keywordExt import GetKeywords
 
 PORT = 5000
 UPLOAD_PATH = 'uploads/'
