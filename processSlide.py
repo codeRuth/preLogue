@@ -2,7 +2,7 @@ from pptx import Presentation
 from pptx.enum.shapes import PP_PLACEHOLDER
 from pptx.exc import PackageNotFoundError
 
-from lib.keywordr import keywordr as k
+from libkey.keywordr import keywordr as k
 
 
 class ProcessSlide(object):

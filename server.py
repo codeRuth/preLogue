@@ -5,7 +5,7 @@ import tornado.ioloop
 import tornado.web
 import tornado.websocket
 
-from lib.keywordr import keywordr as k
+from libkey.keywordr import keywordr as k
 
 # from keywordExt import GetKeywords
 
