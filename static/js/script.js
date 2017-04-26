@@ -1,33 +1,4 @@
-/**
- * Created by coderuth on 4/15/2017.
- */
 'use strict';
-
-function HandleBrowseClick() {
-    var fileinput = document.getElementById("browse");
-    fileinput.click();
-    var textinput = document.getElementById("filename");
-    textinput.value = fileinput.value;
-}
-
-// var control = Vue({
-//     el: '#control',
-//     data: {
-//         clicked: true
-//     },
-//     methods: {
-//         toggle: function (event) {
-//             document.getElementById("toggle").className = "ui toggle icon button active";
-//             // `this` inside methods points to the Vue instance
-//             alert('Hello ' + this.name + '!')
-//             // `event` is the native DOM event
-//             if (event) {
-//                 alert(event.target.tagName)
-//             }
-//         }
-//     }
-// });
-
 var app = new Vue({
     el: '#app',
     data: {
@@ -52,6 +23,7 @@ var app = new Vue({
             }, function (respose) {
             });
         },
+
         createImage: function createImage(file) {
             var image = new Image();
             var reader = new FileReader();
