@@ -7,13 +7,10 @@ class Slide(object):
         self.getA = getTopAction()
         try:
             self.app = win32com.client.Dispatch("PowerPoint.Application")
-            self.presentation = self.app.Presentations.Open(FileName=u'G:\\preLogueClient\\preLogue\\slides\\pythontut.pptx', ReadOnly=1)
+            self.presentation = self.app.Presentations.Open(FileName=u'G:\\preLogueClient\\preLogue\\slides\\java.pptx', ReadOnly=1)
             self.presentation.SlideShowSettings.Run()
         except:
             print("Powerpoint not Open")
-
-    def get_top_classifier(self, message):
-        return self.getA.get_top_classifier(message)
 
     def main_loop(self, message):
         print message
@@ -32,3 +29,6 @@ class Slide(object):
         elif message == 'action.quit':
             self.app.Quit()
             return "action.quit"
+
+    def goToSlide(self, index):
+        self.presentation.SlideShowWindow.View.GotoSlide(index)

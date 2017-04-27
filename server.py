@@ -8,23 +8,18 @@ from libkey.keywordr import keywordr as k
 from getAction import getTopAction
 from processSlide import ProcessSlide
 from changeSlides import Slide
-
-def processFile():
-    # print os.path.abspath(fileUp)
-    p = ProcessSlide('G:\\preLogueClient\\preLogue\\slides\\lecture2.pptx')
-    return p.getKeywords()
+from convert.convert import convertPPT
 
 PORT = 5000
 UPLOAD_PATH = 'slides/'
-g = getTopAction()
-s = Slide()
-keyWords = processFile()
+top = getTopAction()
+slideObj = Slide()
+p = ProcessSlide('slides/java.pptx')
 
 class IndexHandler(tornado.web.RequestHandler):
     @tornado.web.asynchronous
     def get(self):
-        self.render("index.html")
-
+        self.render("ammu.html")
 
 class WebSocketHandler(tornado.websocket.WebSocketHandler):
     def data_received(self, chunk):
@@ -34,19 +29,20 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
         print("Connection Open.")
 
     def on_message(self, message):
-        cvi = g.get_top_classifier(message)
-        key = k.get_keywords(message)
-        print key
-        # if cvi['confidence'] > 0.98:
-        #     s.main_loop(cvi['class_name'])
-        #     print cvi['class_name']
-        #     print cvi['confidence']
-        # else:
-        #     for x in key:
-        #         print x
+        print p.getKeywords()
+        for x in p.getKeywords():
+            print x
+        self.write_message(message)
+        print message
+        hello = top.get_top_classifier(message)
+        print hello
+        if hello['confidence'] > 0.98:
+            slideObj.main_loop(hello)
+        else:
+            for index, x in enumerate(p.getKeywords()):
+                if k.get_keywords(message) == x:
+                    slideObj.goToSlide(index)
 
-        # self.write_message(key.getKey(message))
-        # slideObj.main_loop(message)
 
     def on_close(self):
         print("Connection Closed.")
@@ -59,9 +55,9 @@ class UploadHandler(tornado.web.RequestHandler):
             filename = uploadFile['filename']
             fileObj = open(UPLOAD_PATH + filename, 'wb')
             fileObj.write(uploadFile['body'])
+            conv = convertPPT(UPLOAD_PATH + filename)
+            conv.convertPNG()
             self.redirect('/')
-            processFile(UPLOAD_PATH + filename)
-
 
 class Application(tornado.web.Application):
     def __init__(self):
@@ -74,9 +70,6 @@ class Application(tornado.web.Application):
                                          template_path='templates',
                                          static_path='static',
                                          debug=True)
-
-
-
 
 if __name__ == '__main__':
     app = Application()

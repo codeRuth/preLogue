@@ -4,6 +4,9 @@ from pptx.exc import PackageNotFoundError
 
 from libkey.keywordr import keywordr as k
 
+import sys
+reload(sys)
+sys.setdefaultencoding('utf8')
 
 class ProcessSlide(object):
     def __init__(self, inputPresentation):
@@ -19,7 +22,7 @@ class ProcessSlide(object):
                     if shape.is_placeholder:
                         ph = shape.placeholder_format
                         if ph.type == PP_PLACEHOLDER.TITLE or ph.type == PP_PLACEHOLDER.CENTER_TITLE or ph.type == PP_PLACEHOLDER.VERTICAL_TITLE:
-                            titleObj.append(str(shape.text_frame.text).encode('utf-8'))
+                            titleObj.append((str(shape.text_frame.text).lower()))
             listObj['slides'] = titleObj
             return listObj
         except PackageNotFoundError, e:
@@ -27,8 +30,10 @@ class ProcessSlide(object):
 
     def getKeywords(self):
         keyList = list()
-        keyObj = dict()
         for key in self.getTitle()['slides']:
             keyList.append(k.get_keywords(key))
-        keyObj['keywords'] = keyList
-        return keyObj
+        return keyList
+#         return keyObj
+# if __name__ == '__main__':
+#     p = ProcessSlide('slides/lecture2.pptx')
+#     print p.getKeywords()
