@@ -81,7 +81,7 @@ def get_entities_from_phrase(tagged_sent, phrase2consider):
     bio_tags = [normalise(x.split('/')[0]) + '\t' + x.split('/')[2] for x in word]
     bio_text = '\n'.join(bio_tags)
     mention2entities = extract_entity(bio_text)
-    print mention2entities.keys()
+    # print mention2entities.keys()
 
     _mention2entities = {}
     for mention in mention2entities:

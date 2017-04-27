@@ -26,5 +26,9 @@ class ProcessSlide(object):
             return "PPTX not Found.", e
 
     def getKeywords(self):
+        keyList = list()
+        keyObj = dict()
         for key in self.getTitle()['slides']:
-            print k.get_keywords(key)
+            keyList.append(k.get_keywords(key))
+        keyObj['keywords'] = keyList
+        return keyObj
