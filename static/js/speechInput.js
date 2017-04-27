@@ -44,17 +44,6 @@ function start() {
     }
 }
 
-function startConti() {
-    console.log('start()');
-    reco.continuous = true;
-    console.log('reco.continuous = ' + reco.continuous);
-    try {
-        reco.start();
-    } catch (e) {
-        console.log('exception: ' + e);
-    }
-}
-
 function stop() {
     console.log('stop()');
     reco.stop();

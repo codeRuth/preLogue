@@ -1,6 +1,4 @@
 import os
-import glob
-
 import tornado.httpserver
 import tornado.ioloop
 import tornado.web
@@ -9,20 +7,23 @@ import tornado.websocket
 from libkey.keywordr import keywordr as k
 from getAction import getTopAction
 from processSlide import ProcessSlide
+from changeSlides import Slide
 
-# from keywordExt import GetKeywords
+def processFile():
+    # print os.path.abspath(fileUp)
+    p = ProcessSlide('G:\\preLogueClient\\preLogue\\slides\\lecture2.pptx')
+    return p.getKeywords()
 
 PORT = 5000
 UPLOAD_PATH = 'slides/'
-
-
-# slideObj = Slide()
-# key = GetKeywords()
 g = getTopAction()
+s = Slide()
+keyWords = processFile()
+
 class IndexHandler(tornado.web.RequestHandler):
     @tornado.web.asynchronous
     def get(self):
-        self.render("ammu.html")
+        self.render("index.html")
 
 
 class WebSocketHandler(tornado.websocket.WebSocketHandler):
@@ -34,11 +35,16 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
 
     def on_message(self, message):
         cvi = g.get_top_classifier(message)
-        if cvi['confidence'] > 0.98:
-            print cvi['class_name']
-            print cvi['confidence']
-        else:
-            print 'get_keywords(query) = ', k.get_keywords(message)
+        key = k.get_keywords(message)
+        print key
+        # if cvi['confidence'] > 0.98:
+        #     s.main_loop(cvi['class_name'])
+        #     print cvi['class_name']
+        #     print cvi['confidence']
+        # else:
+        #     for x in key:
+        #         print x
+
         # self.write_message(key.getKey(message))
         # slideObj.main_loop(message)
 
@@ -70,11 +76,7 @@ class Application(tornado.web.Application):
                                          debug=True)
 
 
-def processFile(fileUp):
-    # print os.path.abspath(fileUp)
-    p = ProcessSlide(os.path.abspath(fileUp))
-    print p.getTitle()
-    print p.getKeywords()
+
 
 if __name__ == '__main__':
     app = Application()

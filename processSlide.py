@@ -19,7 +19,7 @@ class ProcessSlide(object):
                     if shape.is_placeholder:
                         ph = shape.placeholder_format
                         if ph.type == PP_PLACEHOLDER.TITLE or ph.type == PP_PLACEHOLDER.CENTER_TITLE or ph.type == PP_PLACEHOLDER.VERTICAL_TITLE:
-                            titleObj.append(str(shape.text_frame.text).lower())
+                            titleObj.append(str(shape.text_frame.text).encode('utf-8'))
             listObj['slides'] = titleObj
             return listObj
         except PackageNotFoundError, e:
